@@ -16,7 +16,7 @@ function App() {
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Header />
-        <Box as="main" maxW="1140px" mx="auto" pt={24} pb={8} px={3}>
+        <Box as="main" maxW="1140px" mx="auto"  p={8} px={3}>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />

@@ -38,10 +38,7 @@ const Header = ({ history }) => {
       boxShadow="md"
       py={3}
       px={2}
-      position="fixed"
-      top="0"
-      left="0"
-      w="100%"
+      
     >
       <Flex flexBasis="1140px" maxW="1140px" mx="auto" justify="space-between">
         <HStack spacing={2}>
@@ -69,7 +66,10 @@ const Header = ({ history }) => {
                     <Heading
                       as="h1"
                       cursor="pointer"
-                      onClick={() => {history.push('/'); onClose()}}
+                      onClick={() => {
+                        history.push('/');
+                        onClose();
+                      }}
                     >
                       Shapshap
                     </Heading>
@@ -129,7 +129,9 @@ const Header = ({ history }) => {
           </Box>
           <Box d="flex" alignItems="center">
             {/*<Image src={logo} cursor="pointer" />*/}
-            <Heading as="h1" cursor='pointer' onClick={() => history.push('/') } >ShapShap</Heading>
+            <Heading as="h1" cursor="pointer" onClick={() => history.push('/')}>
+              ShapShap
+            </Heading>
           </Box>
         </HStack>
         <HStack spacing={3}>
