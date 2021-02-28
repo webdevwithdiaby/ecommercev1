@@ -1,5 +1,7 @@
 import React from 'react';
 
+import shopbag from '../../assets/shopping-bag.svg';
+
 import {
   Box,
   Flex,
@@ -7,6 +9,7 @@ import {
   HStack,
   Text,
   Heading,
+  Image,
   useDisclosure,
   Drawer,
   DrawerBody,
@@ -28,7 +31,7 @@ const Header = () => {
   return (
     <Flex minH="8vh" align="center" boxShadow="md" py={3} px={2}>
       <Flex flexBasis="1140px" maxW="1140px" mx="auto" justify="space-between">
-        <HStack spacing={5}>
+        <HStack spacing={2}>
           <Box>
             <Button
               ref={btnRef}
@@ -36,6 +39,7 @@ const Header = () => {
               variant="ghost"
               onClick={onOpen}
               display={{ base: 'block', md: 'none' }}
+              fontSize={22}
             >
               <RiMenu2Fill />
             </Button>
@@ -79,6 +83,7 @@ const Header = () => {
             </Button>
           </HStack>
           <ColorModeSwitcher />
+          <Image boxSize="34px" src={shopbag} />
         </HStack>
       </Flex>
     </Flex>

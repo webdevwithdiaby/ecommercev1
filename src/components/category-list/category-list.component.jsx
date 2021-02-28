@@ -11,7 +11,6 @@ import { selectCategories } from '../../redux/category/category.selector';
 const CategoryList = ({ categories }) => {
   return (
     <Grid
-      py={8}
       gap={3}
       gridTemplateColumns="repeat(auto-fit,minmax(320px,1fr))"
       justifyItems="center"
