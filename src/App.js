@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 import SigninPage from './pages/signin/sigin.component';
 import ContactPage from './pages/contact/contact.component';
+import SignUpPage from './pages/signup/signup.component';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />
             <Route path="/signin" component={SigninPage} />
+            <Route path="/signup" component={SignUpPage} />
             <Route path="/contact" component={ContactPage} />
           </Switch>
         </Box>

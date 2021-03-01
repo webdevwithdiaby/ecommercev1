@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {withRouter} from 'react-router-dom';
+
 import {
   Flex,
   Box,
@@ -12,7 +14,7 @@ import {
   HStack,
 } from '@chakra-ui/react';
 
-const SigninPage = ({ history }) => {
+const SignUpPage = ({history}) => {
   return (
     <Flex width="full" align="center" justifyContent="center">
       <Box
@@ -23,11 +25,15 @@ const SigninPage = ({ history }) => {
         boxShadow="lg"
       >
         <Box textAlign="center">
-          <Heading>Sign in</Heading>
+          <Heading>Sign up</Heading>
         </Box>
         <Box my={3} textAlign="left">
           <form>
             <FormControl>
+              <FormLabel>Name</FormLabel>
+              <Input type="text" placeholder="John Smith" />
+            </FormControl>
+            <FormControl mt={4}>
               <FormLabel>Email</FormLabel>
               <Input type="email" placeholder="test@test.com" />
             </FormControl>
@@ -36,22 +42,12 @@ const SigninPage = ({ history }) => {
               <Input type="password" placeholder="*******" />
             </FormControl>
             <Button width="full" mt={3} type="submit" colorScheme="teal">
-              Sign In
-            </Button>
-            <Box textAlign="center" mt={2}>
-              <Text>or</Text>
-            </Box>
-            <Button width="full" mt={2} variantColor="teal" variant="outline">
-              Sign In with google
+              Sign Up
             </Button>
             <HStack mt={2} spacing={3}>
-              <Text>Don't have an account</Text>
-              <Button
-                colorScheme="teal"
-                variant="link"
-                onClick={() => history.push('/signup')}
-              >
-                SIGN UP
+              <Text>already have an account</Text>
+              <Button colorScheme="teal" variant="link" onClick={() => history.push('/signin') } >
+                SIGN IN
               </Button>
             </HStack>
           </form>
@@ -61,4 +57,4 @@ const SigninPage = ({ history }) => {
   );
 };
 
-export default SigninPage;
+export default withRouter(SignUpPage);

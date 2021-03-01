@@ -9,6 +9,7 @@ import {
   HStack,
   VStack,
   Text,
+  IconButton,
   Heading,
   Image,
   useDisclosure,
@@ -32,27 +33,21 @@ const Header = ({ history }) => {
   const btnRef = React.useRef();
 
   return (
-    <Flex
-      minH="8vh"
-      align="center"
-      boxShadow="md"
-      py={3}
-      px={2}
-      
-    >
+    <Flex minH="8vh" align="center" boxShadow="md" py={3} px={2}>
       <Flex flexBasis="1140px" maxW="1140px" mx="auto" justify="space-between">
         <HStack spacing={2}>
           <Box>
             <Button
-              ref={btnRef}
               colorScheme="teal"
               variant="ghost"
+              ref={btnRef}
               onClick={onOpen}
               display={{ base: 'block', md: 'none' }}
               fontSize={22}
             >
               <RiMenu2Fill />
             </Button>
+
             <Drawer
               isOpen={isOpen}
               placement="left"
@@ -136,13 +131,13 @@ const Header = ({ history }) => {
         </HStack>
         <HStack spacing={3}>
           <HStack spacing={3} display={{ base: 'none', md: 'block' }}>
-            <Button colorScheme="teal" variant="link">
+            <Button colorScheme="teal" variant="link" onClick={() => history.push('/shop')} >
               SHOP
             </Button>
-            <Button colorScheme="teal" variant="link">
+            <Button colorScheme="teal" variant="link" onClick={() => history.push('/contact')} >
               CONTACT
             </Button>
-            <Button colorScheme="teal" variant="link">
+            <Button colorScheme="teal" variant="link" onClick={() => history.push('/signin')} >
               SIGNIN
             </Button>
           </HStack>
