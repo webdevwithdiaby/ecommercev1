@@ -9,7 +9,6 @@ import {
   HStack,
   VStack,
   Text,
-  IconButton,
   Heading,
   Image,
   useDisclosure,
