@@ -19,15 +19,24 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  IconButton,
 } from '@chakra-ui/react';
 
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 
 import { RiMenu2Fill } from 'react-icons/ri';
 
+import { FaSignOutAlt } from 'react-icons/fa';
+
 import { withRouter } from 'react-router-dom';
 
-const Header = ({ history }) => {
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selector';
+
+import { auth } from '../../firebase/firebase.utils';
+
+const Header = ({ history, currentUser }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -99,18 +108,32 @@ const Header = ({ history }) => {
                       >
                         CONTACT
                       </Button>
-                      <Button
-                        colorScheme="teal"
-                        width="100%"
-                        py={3}
-                        ref={btnRef}
-                        onClick={() => {
-                          onClose();
-                          history.push('/signin');
-                        }}
-                      >
-                        SIGNIN
-                      </Button>
+                      {currentUser === null ? (
+                        <Button
+                          colorScheme="teal"
+                          width="100%"
+                          py={3}
+                          ref={btnRef}
+                          onClick={() => {
+                            onClose();
+                            history.push('/signin');
+                          }}
+                        >
+                          SIGNIN
+                        </Button>
+                      ) : (
+                        <IconButton
+                          colorScheme="teal"
+                          icon={
+                            <FaSignOutAlt
+                              onClick={() => {
+                                auth.signOut();
+                                onClose();
+                              }}
+                            />
+                          }
+                        />
+                      )}
                     </VStack>
                   </DrawerBody>
 
@@ -130,13 +153,25 @@ const Header = ({ history }) => {
         </HStack>
         <HStack spacing={3}>
           <HStack spacing={3} display={{ base: 'none', md: 'block' }}>
-            <Button colorScheme="teal" variant="link" onClick={() => history.push('/shop')} >
+            <Button
+              colorScheme="teal"
+              variant="link"
+              onClick={() => history.push('/shop')}
+            >
               SHOP
             </Button>
-            <Button colorScheme="teal" variant="link" onClick={() => history.push('/contact')} >
+            <Button
+              colorScheme="teal"
+              variant="link"
+              onClick={() => history.push('/contact')}
+            >
               CONTACT
             </Button>
-            <Button colorScheme="teal" variant="link" onClick={() => history.push('/signin')} >
+            <Button
+              colorScheme="teal"
+              variant="link"
+              onClick={() => history.push('/signin')}
+            >
               SIGNIN
             </Button>
           </HStack>
@@ -159,4 +194,8 @@ const Header = ({ history }) => {
   );
 };
 
-export default withRouter(Header);
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default withRouter(connect(mapStateToProps)(Header));
