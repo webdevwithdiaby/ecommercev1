@@ -1,6 +1,6 @@
 import React from 'react';
 
-import shopbag from '../../assets/shopping-bag.svg';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
 
 import {
   Box,
@@ -10,7 +10,6 @@ import {
   VStack,
   Text,
   Heading,
-  Image,
   useDisclosure,
   Drawer,
   DrawerBody,
@@ -20,6 +19,16 @@ import {
   DrawerContent,
   DrawerCloseButton,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  /*MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider,*/
 } from '@chakra-ui/react';
 
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
@@ -33,10 +42,14 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
+import {
+  selectCartItems,
+  selectCartItemsCount,
+} from '../../redux/cart/cart.selectors';
 
 import { auth } from '../../firebase/firebase.utils';
 
-const Header = ({ history, currentUser }) => {
+const Header = ({ history, currentUser, cartItems, cartItemsCount }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -177,15 +190,32 @@ const Header = ({ history, currentUser }) => {
           </HStack>
           <ColorModeSwitcher />
           <Flex align="center" justify="center" position="relative">
-            <Image boxSize="24px" src={shopbag} />
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                colorScheme="teal"
+                variant="ghost"
+                fontSize="38px"
+                icon={<HiOutlineShoppingBag />}
+              ></MenuButton>
+              <MenuList>
+                {cartItems.map(item => (
+                  <MenuItem key={item.id}>
+                    {' '}
+                    {`${item.name} x ${item.quantity}`}{' '}
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </Menu>
+            {/*<Image boxSize="24px" src={shopbag} />*/}
             <Text
               fontSize={10}
               position="absolute"
-              top="70%"
+              top="65%"
               left="50%"
               transform="translate(-50%,-50%)"
             >
-              0
+              {cartItemsCount}
             </Text>
           </Flex>
         </HStack>
@@ -196,6 +226,8 @@ const Header = ({ history, currentUser }) => {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  cartItems: selectCartItems,
+  cartItemsCount: selectCartItemsCount,
 });
 
 export default withRouter(connect(mapStateToProps)(Header));
