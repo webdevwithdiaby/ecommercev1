@@ -22,8 +22,8 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  /*MenuItemOption,
+  /*MenuItem,
+  MenuItemOption,
   MenuGroup,
   MenuOptionGroup,
   MenuIcon,
@@ -48,6 +48,7 @@ import {
 } from '../../redux/cart/cart.selectors';
 
 import { auth } from '../../firebase/firebase.utils';
+import CartItemList from '../cart-item-list/cart-item-list.component';
 
 const Header = ({ history, currentUser, cartItems, cartItemsCount }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -190,7 +191,7 @@ const Header = ({ history, currentUser, cartItems, cartItemsCount }) => {
           </HStack>
           <ColorModeSwitcher />
           <Flex align="center" justify="center" position="relative">
-            <Menu>
+            <Menu w="220px" h="200px">
               <MenuButton
                 as={IconButton}
                 colorScheme="teal"
@@ -198,13 +199,8 @@ const Header = ({ history, currentUser, cartItems, cartItemsCount }) => {
                 fontSize="38px"
                 icon={<HiOutlineShoppingBag />}
               ></MenuButton>
-              <MenuList>
-                {cartItems.map(item => (
-                  <MenuItem key={item.id}>
-                    {' '}
-                    {`${item.name} x ${item.quantity}`}{' '}
-                  </MenuItem>
-                ))}
+              <MenuList mt={2}>
+                <CartItemList cartItems={cartItems} />
               </MenuList>
             </Menu>
             {/*<Image boxSize="24px" src={shopbag} />*/}
